@@ -43,7 +43,8 @@ inquirer
         name: 'email',
     },
 
-  ])];
+  ])
+];
   
 
 // TODO: Create a function to write README file
@@ -57,9 +58,7 @@ fs.writeFile("README.md", generateMarkdown() , (err) => {
 // // TODO: Create a function to initialize app
 function init() {
   inquirer.prompt(questions)
-  
-
-}
+  }
 
 // // Function call to initialize app
 init();
