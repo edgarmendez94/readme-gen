@@ -4,7 +4,7 @@ const fs = require("fs");
 const generateMarkdown = require("./utils/generateMarkdown");
 
 // TODO: Create an array of questions for user input
-const questions = [
+
 
 inquirer
   .prompt([
@@ -44,7 +44,10 @@ inquirer
     },
 
   ])
-];
+  .then((answers) => {
+    generateHTML(answers);
+  })
+
   
 
 // TODO: Create a function to write README file
