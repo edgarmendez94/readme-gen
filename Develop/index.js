@@ -1,7 +1,7 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require("fs");
-const generateMarkdown = require("./utils/generateMarkdown");
+
 
 // TODO: Create an array of questions for user input
 
@@ -10,7 +10,7 @@ inquirer
   .prompt([
     {
       message: 'What is the name of your project?',
-      name: 'name',
+      name: 'title',
     },  
     {
       message: 'Enter project description',
@@ -35,33 +35,79 @@ inquirer
         name: 'liscense',
     },
     {
-        message: 'Github username',
+      message: 'What are its features',
+      name: 'features',
+    },
+    {
+        message: 'Your github account',
         name: 'github',
     },
     {
-        message: 'Email Address',
+        message: 'Where to contact you (Email address)',
         name: 'email',
     },
 
   ])
   .then((answers) => {
-    generateHTML(answers);
+    generateMarkdown(answers);
   })
 
-  
+  const generateMarkdown = ({title,description,install,usage,contrib,liscense,features,github,email}) => {
+    const md =
+`
+# ${title}
+   
+ Description
+    
+ ${description}
+    
+## Table of Contents 
+    
+- [Installation](#installation)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
+- [Github](#github)
+    
+    
+## Installation
+    
+${install}
+    
+## Usage
+    
+${usage}
+    
+## Credits
+    
+${contrib}
+   
+## License
+    
+${liscense}
+    
+## Badges
+    
+    
+## Features
+    
+${features}
+    
+## Github
+    
+${github}
+    
+## Contact Me
+    
+${email}
+`
+   
+;
 
-// TODO: Create a function to write README file
-// function writeToFile(fileName, data) {}
-fs.writeFile("README.md", generateMarkdown() , (err) => {
-    if (err) throw err;
-    console.log("README Created")
-})
+   fs.writeFile(`${title}.md`, md, (err) => {
+    if(err) throw err;
+    console.log("Read Me Made!")
+  })
+   }
 
 
-// // TODO: Create a function to initialize app
-function init() {
-  inquirer.prompt(questions)
-  }
-
-// // Function call to initialize app
-init();
